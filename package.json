@@ -1,4 +1,13 @@
-{
+{"name": "farmspace",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1", 
+    "start": "node app.js"
+  },
+  "author": "Vekti89",
+  "license": "ISC",
   "dependencies": {
     "@mapbox/mapbox-sdk": "^0.12.1",
     "cloudinary": "^1.23.0",

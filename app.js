@@ -124,8 +124,9 @@ process.on('uncaughtException', (err)=>{
     console.log("oh not again..", err)
 });
 
-app.listen(8080, (req, res)=> {
-    console.log("SERVING ON PORT 8080.")
+const port = process.env.PORT || 8080;
+app.listen(port, (req, res)=> {
+    console.log(`SERVING ON PORT ${port}`)
 })  
 
 
