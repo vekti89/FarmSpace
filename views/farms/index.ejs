@@ -1,0 +1,56 @@
+<% layout('/layouts/boilerplate') -%>
+<link rel="stylesheet" href="/styles/farmIndex.css">
+
+<div class="intro text-center">
+    <i class="flaticon-vegetables small shady"></i>
+    <h2 class="shady">FarmSpace</h2>
+    <p class="lead shady">If you are living in San Francisco Bay Area, and you want to sell or buy fresh locally grown food, this is the place for you.</p>
+    <i class="fas fa-ellipsis-h"></i>
+    <p class="lead">Register at FarmSpace and make a nice presentation of your farm and products that you are offering, or take a look at different product categories and fill your basket with what you need.</p>
+    <p>
+        <a href="/farms/new" class="btn btn-primary shady"><i class="fas fa-plus shady"></i> Add farm</a>
+        <a href="/products" class="btn btn-primary shady"><i class="fas fa-list shady"></i> List products</a>
+    </p>
+    <i class="fas fa-ellipsis-h"></i>
+</div>
+
+<div class="row text-center mt-4 mt-lg-5" data-masonry='{"percentPosition": true }'>
+    <% for (let farm of farms) { %>
+        <div class="col-lg-6 col-sm-12 mb-3">
+
+                <div class="row card-box px-2">
+
+                    <div class="col-lg-7 col-sm-7 item px-0">
+                        <img src="<%=farm.photos.length>0 ? farm.photos[0].url : farm.defaultPhoto.url%>" alt="" class="card-img">
+                        <a  class="stretched-link" href="/farms/<%=farm._id%>"><i class="fas fa-info"></i></a>
+                    </div>
+                    
+                    <div class="col-lg-5 col-sm-5 card">
+                    
+                        <div class="card-body px-0">
+                            <div>
+                            <h5 class="card-title shady">
+                                    <%= farm.name %>
+                            </h5>
+
+                            <p class="card-text">
+                                <small><i class="fas fa-map-marker-alt text-primary"></i> <%= farm.location %></small>
+                            </p>
+                            </div>
+                            <div>
+                            <p class="card-texts"><small class="text-muted">
+                                    <%= farm.contact %>
+                                </small></p>
+                            <a href="/farms/<%=farm._id%>" class="btn btn-sm btn-outline-primary stretched-link">More info</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        <% } %>
+        
+</div>
+

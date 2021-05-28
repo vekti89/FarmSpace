@@ -1,0 +1,19 @@
+nav.navbar{
+    background-color: #d4d6db;
+    border-bottom:2px solid #a7abb6;
+    box-shadow: 0px 2px 25px #a8acb6;
+}
+
+nav.navbar form input {
+    max-width: 200px;
+}
+.dropdown-menu {
+    max-width: 283px;
+    margin-bottom:4px;
+}
+
+.navbarBadge {
+    position:relative;
+    top:-15px;
+    left:-3px;
+}

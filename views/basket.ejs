@@ -1,0 +1,100 @@
+<% layout('/layouts/boilerplate') -%>
+<link rel="stylesheet" href="/styles/basket.css">
+
+<div class="intro text-center">
+    <i class="flaticon-vegetables small shady"></i>
+    <h2 class="shady">Farm Space</h2>
+    
+
+<% if(!products || products.length===0) { %>
+    
+    <h5 class="shady">There is no products in your basket.</h5>
+    <i class="fas fa-ellipsis-h"></i>
+    <% } else {%>
+        <h5 class="shady">Products in your Basket</h5>
+        <i class="fas fa-ellipsis-h"></i>
+        <hr class="smaller">
+        <div class="row my-3">
+
+            <div class="col-lg-4 basket-summary">
+                <h5 class="shady">Basket Summary</h5>
+                <i class="fas fa-ellipsis-h mb-3"></i>
+                <p> You have <%=products.length%> <%=products.length===1? "product" : " different products"%> (<%= session.basket.totalQty %> <%= session.basket.totalQty===1? "item" : "items"%>) in your basket.</p>
+                <p class="shady mt-3">Guide Price: $<%=totalPrice%></p>
+                <p class="shady">Delivery: Free of charge</p>
+                <i class="fas fa-ellipsis-h"></i>
+                <h5 class="shady my-2">TOTAL: $<%=totalPrice%></h5>
+                <a href="/checkout" class="btn btn-primary mt-2 px-4"><i class="fas fa-credit-card"></i> CHECKOUT</a>
+            </div>
+            <hr class="d-lg-none smaller">
+            
+            <div class="col-lg-8 product-grid">
+
+                <h5 class="shady">Products in your Basket</h5>
+                <i class="fas fa-ellipsis-h mb-3"></i>
+
+                
+                <div class="row text-center" data-masonry='{"percentPosition": true }'>
+                    <% for (let product of products) { %>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mb-2">
+
+                            <div id="productItem">
+                                <img src="<%=product.item.photos.length>0 ? product.item.photos[0].url : product.item.defaultPhoto.url%>"
+                                        alt="" class="card-img">
+                            </div>
+
+                            <div class="card">
+
+                                    <div class="card-body">
+                                        <h5 class="card-title mb-0 shady">
+                                            <%= product.item.name %>
+                                        </h5>
+                                        <p>
+                                            <small class="text-muted my-0">
+                                                <%=product.item.category%>
+                                            </small>
+                                        </p>
+                                        <i class="fas fa-ellipsis-h"></i>
+                                        
+                                        <p>
+                                            <a href="/reduce-qty/<%=product.item._id%>" class="btn btn-sm btn-outline-success px-3"> <i class="fas fa-minus"></i> </a>
+                                            <span class="btn">
+                                            <%=product.qty%>
+                                                <%=product.item.unit%>
+                                            </span>
+                                            <a href="/add-qty/<%=product.item._id%>" class="btn btn-sm btn-outline-success px-3"> <i class="fas fa-plus"></i> </a>
+                                        </p>
+
+                                        <p class="card-text">
+                                            <small>
+                                            <%=product.qty%>
+                                                <%=product.item.unit%> in your basket
+                                            </small>
+                                        </p>
+                                        <div id="flex">
+
+                                        <p class="price">
+                                            Price: $<%= product.price %>
+                                        </p>
+
+                                        <p><a class="btn btn-sm btn-outline-secondary px-4" href="/delete-item/<%=product.item._id%>"><i
+                                                class="fas fa-trash-alt"></i></a></p>
+                                            </div>
+                                    </div>
+                            </div>
+                        </div>
+
+                        <% } %>
+                            
+                            <div class="mt-2">
+                                <hr class="d-none d-md-block mb-3">
+                                <p class="lead d-inline btn btn-outline-primary">TOTAL: $<%=totalPrice%></p>
+                                <a href="/empty-basket" class="btn btn-outline-secondary lead">Empty Basket</a>
+                            </div>
+                </div>
+
+                    <% } %>
+
+            </div>
+        
+        </div>

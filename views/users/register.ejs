@@ -1,0 +1,156 @@
+<% layout("layouts/boilerplate") %>
+<link rel="stylesheet" href="/styles/farmIndex.css">
+
+
+    <div class="row">
+        <div class="offset-1 col-10 offset-md-2 col-md-8 mt-3 mt-md-4 mt-lg-5">
+
+            <div class="intro text-center">
+                <h2 class="shady">Register</h2>
+                <i class="fas fa-ellipsis-h"></i>
+            </div>
+            
+            <form action="/register" method="POST" class="validated-form mt-2 mt-lg-4 row g-3" novalidate enctype="multipart/form-data">
+
+            
+               
+                <div class="col-lg-5">
+                    <label class="form-label" for="firstName">First Name</label>
+                    <div class="input-group">
+                        <span class="input-group-text" id="firstName"><small><i class="fas fa-user-circle text-primary"></i></small></span>
+                        <input class="form-control" type="text" id="firstName" name="firstName" placeholder="First Name"
+                        required>
+                        <div class="invalid-feedback">
+                            This field is required.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-5 col-sm-8">
+                    <label class="form-label" for="lastName">Last Name</label>
+                    <div class="input-group">
+                        <span class="input-group-text" id="lastName"><small><i class="fas fa-user-circle text-primary"></i></small></span>
+                        <input class="form-control" type="text" id="lastName" name="lastName" placeholder="Last Name"
+                        required>
+                        <div class="invalid-feedback">
+                            This field is required.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-sm-4">
+                    <label class="form-label" for="gender">Gender</label>
+                    <select class="form-select" aria-label="gender select" id="gender" name="gender" required>
+                        <option value=""></option>
+                        <option value="male">male</option>
+                        <option value="female">female</option>
+                    </select><div class="invalid-feedback">
+                        Please select gender.
+                    </div>
+                </div>
+            
+                <div class="col-lg-4 col-md-6">
+                    <label class="form-label" for="username">Username</label>
+                    <div class="input-group">
+                        <span class="input-group-text" id="username"><small><i class="fas fa-user text-primary"></i></small></span>
+                        <input class="form-control" type="text" id="username" name="username" placeholder="Username"
+                        required>
+                        <div class="invalid-feedback">
+                            Please provide a username.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <label class="form-label" for="password">Password</label>
+                    <div class="input-group">
+                        <span class="input-group-text" id="password"><small><i class="fas fa-key text-primary"></i></small></span>
+                        <input class="form-control" type="password" id="password" name="password" placeholder="Password"
+                        required>
+                        <div class="invalid-feedback">
+                            Please provide a password.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <label class="form-label" for="email">Email</label>
+                    <div class="input-group">
+                        <span class="input-group-text" id="email"><small><i class="fas fa-at text-primary"></i></small></span>
+                        <input class="form-control" type="email" id="email" name="email" placeholder="Email" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid email address.
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="form-label" for="photo">Add a photo of you or your favourite avatar</label>
+                    <div class="input-group">
+                        <span class="input-group-text" id="photo"><i class="fas fa-image text-primary"></i></span>
+                        <input class="form-control" type="file" id="photo" name="photo" required>
+                        <div class="invalid-feedback">
+                            A photo is required.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <label class="form-label" for="streetAddress">Street Address</label>
+                    <div class="input-group">
+                        <span class="input-group-text" id="streetAddress"><small><i class="fas fa-home text-primary"></i></small></span>
+                        <input class="form-control" type="streetAddress" id="streetAddress" name="streetAddress" placeholder="Street Address" required>
+                        <div class="invalid-feedback">
+                            This field is required.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label" for="city">City</label>
+                    <div class="input-group">
+                        <span class="input-group-text" id="city"><i class="fas fa-street-view text-primary"></i></span>
+                        <input class="form-control" type="city" id="city" name="city" placeholder="City" required>
+                        <div class="invalid-feedback">
+                            This field is required.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <label class="form-label" for="country">Country</label>
+                    <div class="input-group">
+                        <span class="input-group-text" id="country"><small><i class="fas fa-globe-americas text-primary"></i></small></span>
+                        <input class="form-control" type="country" id="country" name="country" placeholder="Country" required>
+                        <div class="invalid-feedback">
+                            This field is required.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label" for="zipCode">Zip Code</label>
+                    <div class="input-group">
+                        <span class="input-group-text" id="zipCode"><small><i class="fas fa-map-marker-alt text-primary"></i></small></span>
+                        <input class="form-control" type="zipCode" id="zipCode" name="zipCode" placeholder="Zip Code" required>
+                        <div class="invalid-feedback">
+                            This field is required.
+                        </div>
+                    </div>
+                </div>
+<!--
+                 <div class="mb-3">   enctype="multipart/form-data"
+                    <label class="form-label" for="photo">Add a photo of you or your favourite avatar</label>
+                    <input class="form-control" id="photo" type="file" name="photo">
+                </div> -->
+              
+                <div class="form-group">
+                    <button class="form-control btn-primary my-4"><small><i class="fas fa-user"></i></small> REGISTER!</button>
+                    <hr>
+                </div>  
+            </form>
+            <a class="btn btn-primary btn-sm mt-2" href="/farms"><small><i class="fas fa-arrow-circle-left"></i></small> Back!</a>
+        </div>
+    </div>
+
+                

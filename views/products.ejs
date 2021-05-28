@@ -1,0 +1,56 @@
+<% layout('/layouts/boilerplate') -%>
+<link rel="stylesheet" href="/styles/productInd.css">
+
+<div class="intro text-center">
+    <i class="flaticon-vegetables small shady"></i>
+    <h2 class="shady">Farm Space</h2>
+    <h5 class="shady"><%= category.length? category : "All available products"%></h5>
+    <i class="fas fa-ellipsis-h"></i>
+</div>
+
+<div class="row text-center mt-4 mt-lg-5 " id="product-grid" data-masonry='{"percentPosition": true }'>
+    <% for(let product of products){ %>
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-4">
+            <div id="productItem">
+                <img src="<%=product.photos.length>0 ? product.photos[0].url : product.defaultPhoto.url%>" class="card-img" alt="<%= product.name %>" >
+            </div>
+
+
+            <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title mb-0 shady">
+
+                                <%= product.name %>
+                            </h5>
+                                
+                            <p>
+                                <small class="text-muted my-0">
+                                    <%=product.category%>
+                                </small>
+                            </p>
+                            <i class="fas fa-ellipsis-h"></i>
+
+
+                            <p class="card-text text-truncate">
+                                <small>
+                                    <%=product.about%> 
+                                </small> 
+                            </p>
+
+                            <p class="price">    
+                                Price <%=product.price %>€/<%=product.unit%>
+                            </p>
+
+                            <p>
+                                <a href="/add-to-basket/<%= product._id%>" class="btn btn-sm btn-outline-success">Add To Basket</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+        <% } %>
+</div>
+
+<div class="text-center mt-4">   
+    <a href="/farms" class="btn btn-sm btn-primary"><i class="fas fa-arrow-circle-left"></i> Back To All Farms</a>
+    <a href="/basket" class="btn btn-sm btn-primary"> <i class="fas fa-shopping-cart"></i> Go To My Basket</a>
+</div>

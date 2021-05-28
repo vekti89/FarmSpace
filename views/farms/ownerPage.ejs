@@ -1,0 +1,37 @@
+<% layout('/layouts/boilerplate') -%>
+<link rel="stylesheet" href="/styles/show.css">
+
+<div class="row">
+    <div class="col-md-6"> 
+      
+      <div class="card mb-3 text-center">
+        <div class="accountCoverPhoto" style='background-image: url(/images/farmPhotoDefault.jpg)'></div>
+        <div class="card-body accountUserData">
+            <img src="<%=owner.photo.url%>" alt="" class="accountUserPhoto bg-white">
+            <h5 class="card-title mt-0 shady"><%=owner.fullname%></h5>
+            <p class="mb-0"><small class="text-muted"><i class="fas fa-map-marker-alt text-primary"></i> <%=owner.streetAddress%>, <%=owner.city%></small></p>
+            <p class="my-0"><small class="text-muted"><%=owner.zipCode%>, <%=owner.country%></small></p>
+            <p class="mt-2 shady"><small><i class="far fa-envelope text-primary"></i> <%=owner.email%>
+            </small></p>        
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 mt-2 mt-lg-0">
+        <h5 class="card-title mb-0 shady">
+            <%=farm.name%> 
+          </h5>
+          <small class="text-muted">
+            <i class="fas fa-map-marker-alt text-primary"></i> <%=farm.location%>
+          </small>
+        <p>
+            
+        <% if(farm.photos.length===0) { %>
+            <img src="<%=farm.defaultPhoto.url%> " alt="" class="farmPhoto"> 
+            <% } else {%> 
+            <img src="<%=farm.photos[0].url%> " alt="" class="farmPhoto">
+            <% } %> 
+            <a href="/farms/<%=farm._id%>" class="btn btn-sm btn-primary"><i class="fas fa-arrow-circle-left"></i> Go To The Farm</a>
+        </p>
+    </div>
+</div>

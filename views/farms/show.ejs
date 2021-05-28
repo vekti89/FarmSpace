@@ -1,0 +1,163 @@
+<% layout('/layouts/boilerplate') -%>
+<link rel="stylesheet" href="/styles/show.css">
+<link rel="stylesheet" href="/styles/stars.css">
+
+<div class="row">
+    <div class="col-lg-7"> 
+      
+      <div class="card mb-3">
+
+        <% if(farm.photos.length===0) { %>
+          <div class="default-photo"> 
+              <a href="/farms/<%=farm._id%>/edit"><img src="<%=farm.defaultPhoto.url%>" class="d-block mx-auto w-100" alt=""></a>
+          </div>
+        <% } %>
+
+
+        <div id="farmCarousel" class="carousel slide card-img-top" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <% farm.photos.forEach((photo, i) => { %> 
+              <div  class='carousel-item <%= i === 0 ? "active" : "" %>'>
+                <img src="<%=photo.url%>" class="d-block mx-auto w-100" alt="">
+            </div>
+            <% }) %> 
+          </div>
+
+          <% if (farm.photos.length > 1) { %> 
+          <a class="carousel-control-prev" href="#farmCarousel" role="button" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#farmCarousel" role="button" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </a>
+          <% } %> 
+        </div>
+  
+        <div class="card-body">
+          <h5 class="card-title mb-0 shady">
+            <%=farm.name%>
+          </h5>
+          <small class="text-muted">
+            <i class="fas fa-map-marker-alt text-primary"></i> <%=farm.location%>
+          </small>
+          <p class="mt-2">
+            <em>Submitted & Owned By <a class="shady" href="/farms/<%=farm._id%>/owner/<%=farm.owner._id%>"><%= farm.owner.fullname %></a></em>
+          </p>
+          
+          <div class="mb-3">
+            <a class="btn btn-sm btn-primary" href="/farms/<%=farm._id%>/products"><i class="fas fa-shopping-cart"></i> Farm's Products</a>
+          </div>
+          <p class="card-text">
+            <%=farm.about%>
+          </p>
+          
+
+          <% if(currentUser && farm.owner.equals(currentUser._id)) {%> 
+            <div class="mt-1">
+            <a class="btn btn-sm btn-outline-secondary mt-1" href="/farms/<%=farm._id%>/products/new"><i class="fas fa-plus shady"></i> Add product</a>
+            <a class="card-link btn btn-sm btn-outline-secondary mt-1" href="/farms/<%=farm._id%>/edit"><i class="fas fa-pencil-alt"></i> Edit </a>
+            <form class="d-inline " method="POST" action="/farms/<%=farm._id%>?_method=DELETE">
+              <button class="btn btn-sm btn-outline-secondary mt-1"><i class="fas fa-trash-alt"></i> Delete farm</button>
+            </form>
+          </div>
+          <% } %>
+          
+          
+          </div>
+
+            <div class="card-footer py-3">
+              <a class="btn btn-sm btn-primary" href="/farms"><i class="fas fa-arrow-circle-left"></i> Back To All Farms</a>
+            </div>
+      </div>
+    </div>
+  
+    <div class="col-lg-5 mt-2 mt-lg-0">
+      <small class="shady"><i class="fas fa-map-marker-alt text-primary"></i> Find Us Easily</small>
+      <div id='map'></div>
+
+      <!--Reviews section-->
+      <div class="card reviews bg-light mt-3">
+        <!--Setting up the add new review button that is used for collapsing-->
+        <div class="text-right">
+            <a class="btn btn-primary btn-sm float-end mt-2 mx-3" role="button" data-bs-toggle="collapse" href="#collapseComment" aria-expanded="false" aria-controls="collapseComment">
+              <i class="fas fa-plus"></i> Add New Review</a>
+        </div>
+      
+        <div class="card-body"> <!--VEKTI-->
+      
+        <!--Comment section title-->
+          <h5 class="shady">Farm Reviews <i class="fas fa-comment"></i></h5>
+      
+        <!--Collapse Add a review form START-->
+          <div class="collapse" id="collapseComment">
+            <div class="card bg-light commentNoUser">
+                <% if(!currentUser) { %>
+                <!--If the user is not logged in, direct him to the login page-->
+                <p class="ml-2 mb-1"><small>You need to be logged in first.</small></p> 
+                <p class="ml-2 mb-1"><small><a href="/login">Click here</a> to go to the login page.</small></p>
+                <% } %>
+      
+                <% if(currentUser) { %>
+                <!--If the user is logged in, show the new review form-->
+              <div class="card-body">	
+                <% if (currentUser) {%> 
+                  <h5>Rate this farm.</h5>
+                  <form class="mt-1 validated-form" method="POST" action="/farms/<%=farm._id%>/reviews" novalidate>
+                    <fieldset class="starability-basic">
+                      <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+                      <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                      <label for="first-rate1" title="Terrible">1 star</label>
+                      <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                      <label for="first-rate2" title="Not good">2 stars</label>
+                      <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                      <label for="first-rate3" title="Average">3 stars</label>
+                      <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                      <label for="first-rate4" title="Very good">4 stars</label>
+                      <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                      <label for="first-rate5" title="Amazing">5 stars</label>
+                    </fieldset>
+                    <div class="mb-1">
+                      <label class="form-label" for="body">Review <i class="fas fa-pencil-alt"></i></label>
+                      <textarea placeholder="Write your review here..." class="form-control" name="review[body]" id="body" rows="2" required></textarea>
+                    </div>
+                    <button class="btn my-2 btn-sm btn-primary"><i class="fas fa-plus"></i> Add!</button>
+                  </form>
+                  <% } %>
+              </div>
+                <% } %>
+            </div>
+        </div> <!--collapse div-->
+      
+        <!--Check if there are reviews, if there are none say no reviews.-->
+      <% if (farm.reviews.length === 0) { %>
+        <small><em class="text-muted">No reviews yet.</em></small>
+        <% } %>
+  
+      <div style="max-height:450px; border-radius: 3px;" class="overflow-auto mt-3 bg-white p-3">
+      <% for (let review of farm.reviews) { %>
+  
+      <div class="m-2 p-3 review bg-light">
+          <img class ="userPhoto" src="<%=review.author.photo.url%>"> <span class="card-subtitle mx-1"><%=review.author.firstName%> <%=review.author.lastName%></span> 
+          <p class="starability-result" data-rating="<%=review.rating%>">
+            Rated: <%= review.rating %> stars
+          </p>
+          <p class="card-text text-muted"><em><%=review.body%></em></p>
+          <% if(currentUser && review.author.equals(currentUser._id)) { %> 
+          <form  class="delRevForm" method="POST" action="/farms/<%=farm._id%>/reviews/<%=review._id%>?_method=DELETE">
+            <button class="btn btn-sm btn-outline-secondary "><i class="fas fa-trash-alt"></i> Delete review</button>
+          </form>
+          <% } %> 
+      </div>
+  
+      <% } %>
+
+    </div>
+
+<script>
+  const mapToken = "<%-process.env.MAPBOX_TOKEN%>";
+  const farm = <%- JSON.stringify(farm) %>;
+</script>
+
+<script src="/javascripts/farmMap.js"></script>

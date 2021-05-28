@@ -1,0 +1,101 @@
+<% layout('/layouts/boilerplate') -%>
+<link rel="stylesheet" href="/styles/show.css">
+
+<div class="row">
+    <div class="col-lg-7"> 
+
+        <div class="card mb-3">
+
+            <% if(product.photos.length===0) { %>
+                <div class="default-photo">
+                    <a href="/farms/<%=farm._id%>/products/<%=product._id%>/edit"><img
+                            src="<%=product.defaultPhoto.url%>" class="d-block mx-auto w-100"
+                            alt=""></a>
+                </div>
+                <% } %>
+                    
+            <div id="farmCarousel" class="carousel slide card-img-top" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <% product.photos.forEach((photo, i)=> { %>
+                        <div class='carousel-item <%= i === 0 ? "active" : "" %>'>
+                            <img src="<%=photo.url%>" class="d-block mx-auto w-100" alt="">
+                        </div>
+                        <% }) %>
+                </div>
+
+                <% if (product.photos.length> 1) { %>
+                    <a class="carousel-control-prev" href="#farmCarousel" role="button" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#farmCarousel" role="button" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </a>
+                    <% } %>
+            </div>
+
+        <div class="card-body">
+            <h5 class="card-title mb-0 shady">
+                <%=product.name%>
+            </h5>
+            <small class="text-muted">
+                <i class="fas fa-list text-primary"></i> <%=product.category %>
+            </small>
+                <p class="price">
+                    Price <%=product.price %>$/<%=product.unit%>
+                    <% if(product._id in basket.items){ %> 
+                        <span class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-sm btn-outline-success disabled"><%=basket.items[productId].qty%> In Basket</button>
+                            <a href="/add-to-basket/<%= product._id%>" class="btn btn-sm btn-success"> <small><i class="fas fa-plus"></i></small> Add More</a>
+
+                        </span> 
+                        
+                        <% } else {%> 
+                            <a href="/add-to-basket/<%= product._id%>" class="btn btn-sm btn-outline-success"> <small><i class="fas fa-plus"></i></small> Add To Basket</a>
+                        <% } %> 
+                </p>
+                <p class="card-text">
+                    <%=product.about %>
+                </p>
+
+                <% if(currentUser && farm.owner.equals(currentUser._id)) {%> 
+                    <div class="mt-1">
+                        <a href="/farms/<%=farm._id%>/products/<%=product._id%>/edit" class="btn btn-sm btn-outline-secondary mt-1"><i class="fas fa-pencil-alt"></i> Edit</a>
+                        <form class ="d-inline" method="POST" action="/farms/<%=farm._id%>/products/<%=product._id%>?_method=DELETE">
+                            <button class="btn btn-sm btn-outline-secondary mt-1"><i class="fas fa-trash-alt"></i> Delete Product</button>
+                        </form>
+                    </div>
+                <% } %>
+
+            </div>
+
+            <div class="card-footer py-3">
+                <a class="btn btn-sm btn-primary" href="/farms/<%=farm._id%>/products"><i class="fas fa-arrow-circle-left"></i> Back To All Products</a>
+              </div>
+        </div>
+        </div>
+        
+                 
+           
+    
+
+    <div class="col-lg-5 mt-2 mt-lg-0">
+        <h5 class="card-title mb-0 shady">
+            <%=farm.name%> 
+          </h5>
+          <small class="text-muted">
+            <i class="fas fa-map-marker-alt text-primary"></i> <%=farm.location%>
+          </small>
+        <p>
+            
+        <% if(farm.photos.length===0) { %>
+            <img src="<%=farm.defaultPhoto.url%> " alt="" class="farmPhoto"> 
+            <% } else {%> 
+            <img src="<%=farm.photos[0].url%> " alt="" class="farmPhoto">
+            <% } %> 
+            <a href="/farms/<%=farm._id%>" class="btn btn-sm btn-primary"><i class="fas fa-arrow-circle-left"></i> Back To The Farm</a>
+        </p>
+               
+    </div>
+</div>

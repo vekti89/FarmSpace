@@ -1,0 +1,75 @@
+<% layout('/layouts/boilerplate') -%>
+<link rel="stylesheet" href="/styles/productInd.css">
+
+<div class="intro text-center">
+    <i class="flaticon-vegetables small shady"></i>
+    <h2 class="shady"><%=farm.name%></h2>
+    <h5 class="shady">Complete Product Offer</h5>
+    <i class="fas fa-ellipsis-h"></i>
+
+</div>
+    
+        <div class="row text-center mt-4 mt-lg-5 " id="product-grid" data-masonry='{"percentPosition": true }'>
+            <% for(let product of farm.products){ %>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-4">
+                    <div id="productItem">
+                        <a href="/farms/<%=farm._id%>/products/<%=product._id%>"> 
+                            <img src="<%=product.photos.length>0 ? product.photos[0].url : product.defaultPhoto.url%>" class="card-img" alt="<%= product.name %>" >
+                        </a>
+                    </div>
+
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title mb-0 shady">
+
+                                <%= product.name %>
+                            </h5>
+                                
+                            <p>
+                                <small class="text-muted my-0">
+                                    <%=product.category%>
+                                </small>
+                            </p>
+                            <i class="fas fa-ellipsis-h"></i>
+
+
+                            <p class="card-text text-truncate">
+                                <small><a href="/farms/<%=farm._id%>/products/<%=product._id%>">
+                                    <%=product.about%> 
+                                </a></small> 
+                            </p>
+
+                            <p class="price">    
+                                Price <%=product.price %>$/<%=product.unit%>
+                            </p>
+
+                            <p>
+                                <a href="/farms/<%=farm._id%>/products/<%=product._id%>" class="btn btn-sm btn-outline-primary">More Info</a>
+                                <a href="/add-to-basket/<%= product._id%>" class="btn btn-sm btn-outline-success">Add To Basket</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+        </div>
+    
+        <div class="text-center mt-4">   
+            <a href="/farms/<%=id%>" class="btn btn-sm btn-primary"><i class="fas fa-arrow-circle-left"></i> Back To The Farm</a>
+            <a href="/basket" class="btn btn-sm btn-primary"> <i class="fas fa-shopping-cart"></i> Go To My Basket</a>
+        </div>
+
+
+
+    <% if(currentUser && farm.owner.equals(currentUser._id)) {%>
+        
+        <div class="text-center">
+            <i class="flaticon-vegetables small shady"></i>
+            <h5 class="shady">Would you like to add more products to your farm?</h5>
+            <i class="fas fa-ellipsis-h"></i>
+            <p>
+                <a href="/farms/<%=id%>/products/new" class="btn btn-sm btn-outline-secondary">Add New Product</a>
+            </p>
+        </div>      
+            
+    <% } %> 

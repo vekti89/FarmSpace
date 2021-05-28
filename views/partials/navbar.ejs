@@ -1,0 +1,72 @@
+<script src="https://kit.fontawesome.com/9e4a112d17.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/icons/font/flaticon.css">
+<link rel="stylesheet" href="/styles/navbar.css">
+
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-light"> 
+    <div class="container-fluid mx-3">
+      <a class="flaticon-vegetables small navbar-brand" href="/"> FarmSpace</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse mt-lg-4" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto ">
+            <li class="nav-item">
+                <a class="nav-link px-1" href="/farms">Home</a>
+            </li>
+            
+            <li class="nav-item dropdown px-1">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Products
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li class="px-2 text-center"><a class="dropdown-item nav-link" href="/fruit&nuts">Fruit & Nuts</a></li>
+                <li class="px-2 text-center"><a class="dropdown-item nav-link" href="/vegetables">Vegetables</a></li>
+                <li class="px-2 text-center"><a class="dropdown-item nav-link" href="/eggs&dairy">Eggs & Dairy</a></li>
+                <li class="px-2 text-center"><a class="dropdown-item nav-link" href="/salads&herbs&oil">Salads, Herbs, Oil</a></li>
+                <li class="px-2 text-center"><hr class="dropdown-divider"></li>
+                <li class="px-2 text-center"><a class="dropdown-item nav-link" href="/products">All Products</a></li>
+              </ul>
+            </li>
+            <form method="POST" action="/products" class="d-flex px-1">
+              <input class="form-control me-2" type="search" name="search" placeholder="Search products..." aria-label="Search products">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </ul>  
+
+        <div class="navbar-nav">
+          <li class="nav-item px-1 pt-2 pt-lg-0">
+            <a class="nav-link" href="/basket"><i class="fas fa-shopping-cart"></i> 
+              My Basket <span class="badge navbarBadge bg-success"><%= session.basket ? session.basket.totalQty : "0"%></span>
+            </a>
+          </li>
+          
+          <li class="nav-item dropdown">
+            <% if(!currentUser) { %> 
+              <a class="nav-link dropdown-toggle px-1" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-users-cog"></i> User Management
+              </a>
+            <% } else { %>
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-user"></i> <%=currentUser.fullname%>
+              </a>
+            <% } %>
+
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <% if(!currentUser) { %> 
+                <li class="px-3 text-center"><a class="dropdown-item nav-link" href="/login"><small><i class="fas fa-user"></i></small> Login</a></li>
+                <li class="px-3 text-center"><hr class="dropdown-divider"></li>
+                <li class="px-3 text-center"><a class="dropdown-item nav-link" href="/register"><small><i class="fas fa-user-plus"></i></small> Register</a>
+              <% } else { %>
+                <li class="px-3 text-center"><a class="dropdown-item nav-link" href="/account/<%=currentUser.id%>"><small><i class="fas fa-user-cog"></i></small> My account</a></li>
+                <li class="px-3 text-center"><hr class="dropdown-divider"></li>
+                <li class="px-3 text-center"><a class="dropdown-item nav-link" href="/logout"><small><i class="fas fa-user-slash"></i></small> Logout</a></li>
+              <% } %> 
+            </ul>
+          </li>
+          
+        </div>
+      </div>
+    </div>
+  </nav>

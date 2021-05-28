@@ -1,0 +1,138 @@
+.main {
+    display:flex; 
+    flex-direction: column; 
+    align-items: center; 
+    padding: 100px 80px; 
+    position: relative; 
+    justify-content: center;
+    min-height: 100vh;
+    color:#ffffff;
+    font-family: 'Nunito', sans-serif;
+    font-weight: lighter;
+}
+
+.main .background-image {
+    position: absolute; 
+    top:0; 
+    left:0; 
+    width:100%; 
+    height:100%;
+    background-size: cover; 
+    z-index: -1;
+    background-color: #555a2d;
+    filter: grayscale(30%) brightness(50%) hue-rotate(var(--value, 360deg)); --value:30deg; 
+}
+
+.main h1 {
+    font-size: 60px;
+    margin-bottom: 20px; 
+}
+
+.main hr {
+    color: white; 
+    max-width: 20%;
+    margin-left: 40%;
+    height: 8px;
+    border: 0;
+    box-shadow: inset 0 8px 8px -8px #1B1B1B;
+}
+
+.main h3 {
+    margin-top:20px; 
+    font-size: 45px; 
+    margin-bottom: 20px; 
+}
+
+.main h4 {
+    font-size: 35px; 
+    margin-bottom: 45px; 
+}
+
+.button {
+    outline: none; 
+    border: none; 
+    cursor: pointer; 
+    position: relative; 
+    background: #1B1B1B;
+    background: linear-gradient(0deg, #1B1B1B 1%, #9A7A4D 40%, #d1b48b 70%, #ffffff 100%);
+    font-size: 30px;
+    font-weight:bolder; 
+    color: white; 
+    letter-spacing: 2px;
+    text-decoration: none;
+    padding: 10px 50px; 
+    border-radius: 0.5em;
+    box-shadow: 0 5px 3px #1B1B1B; 
+    filter:grayscale(30%) hue-rotate(var(--value, 360deg)); --value:30deg;
+}
+
+.button:hover {
+    box-shadow: 0 3px 3px #1B1B1B;
+    top: 2px; 
+    color: white; 
+}
+
+.button:active {
+    box-shadow: none; 
+    top: 5px; 
+}
+
+.main-content { 
+    opacity: 0; 
+    margin-top: 60px; 
+    animation: 1.5s slidefade 0.7s forwards; 
+}
+@keyframes slidefade {
+    100% {
+        opacity: 1; 
+        margin:0; 
+    }
+}
+
+@media (max-width: 992px){
+    .main {
+        padding: 35px 20px; 
+    }
+    .main h1 {
+        font-size: 40px; 
+    }
+    .main h3 {
+        font-size: 30px;
+    }
+    .main h4 {
+        font-size: 25px; 
+    }
+    .main .button {
+        font-size: 25px;
+        padding: 8px 40px; 
+        box-shadow: 0 3px 2px #1B1B1B;
+    }
+    .button:hover {
+        box-shadow: 0 2px 2px #1B1B1B;
+        top:1px;
+}
+
+@media (max-width: 576px){
+    .main {
+        padding: 30px 20px; 
+    }
+    .main h1 {
+        font-size: 30px; 
+    }
+    .main h3 {
+        font-size: 22px;
+    }
+    .main h4 {
+        font-size: 18px; 
+        margin-bottom: 35px; 
+    }
+    .main .button {
+        font-size: 20px;
+        padding: 6px 30px;
+    }
+}
+
+.shady {
+	text-shadow: 2px 2px 3px #1B1B1B;
+}
+

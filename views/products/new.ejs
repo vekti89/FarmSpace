@@ -1,0 +1,85 @@
+<% layout('/layouts/boilerplate') -%>
+
+<div class="row">
+    <div class="offset-1 col-10 offset-md-2 col-md-8 offset-lg-3 col-lg-6 mt-3 mt-md-4">
+        
+        <div class="intro text-center">
+            <h2 class="shady">Add New Product</h2>
+            <h5 class="shady"><%=farm.name%></h5>
+            <i class="fas fa-ellipsis-h"></i>
+        </div>
+
+        <form method="POST" action="/farms/<%=farm._id%>/products" novalidate class="validated-form row" enctype="multipart/form-data">
+            
+            <div class="mb-3 col-lg-9">
+                <label class="form-label" for="name">Product name</label>
+                <div class="input-group">
+                    <span class="input-group-text" id="name"><small><i class="fas fa-carrot text-primary"></i></small></span>
+                    <input class="form-control" id="name" type="text" name="product[name]" placeholder="Product name" required>
+                    <div class="invalid-feedback">
+                        Please provide a name for the product.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-3 col-lg-3 col-sm-6">
+                <label class="form-label"for="price">Price ($)</label>
+                <div class="input-group">
+                    <span class="input-group-text" id="price"><small><i class="fas fa-dollar-sign text-primary"></i></small></span>
+                    <input class="form-control" id="price" type="number" min="0" step="0.5" value="0.00" name="product[price]" placeholder="Product price" required>
+                    <div class="invalid-feedback">
+                        Please provide a price for the product.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-3 col-lg-6 col-sm-6">
+                <label class="form-label"for="price">Unit</label>
+                <select class="form-select" aria-label="product unit select" id="unit" name="product[unit]">
+                    <option value="kg">kg</option>
+                    <option value="l">l</option>
+                    <option value="pc">pc</option> 
+                </select>
+            </div>
+
+            <div class="mb-3 col-lg-6">
+                <label for="category">Product category</label>
+                <select class="form-select mt-2" aria-label="product category select" id="category" name="product[category]">
+                    <option value="Fruit & Nuts">Fruit & Nuts</option>
+                    <option value="Vegetables">Vegetables</option>
+                    <option value="Eggs & Dairy">Eggs & Dairy</option>
+                    <option value="Salads, Herbs, Oil">Salads, Herbs, Oil</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label"for="about">About the product</label>
+                <div class="input-group">
+                    <span class="input-group-text" id="about"><small><i class="fas fa-file text-primary"></i></small></span>
+                    <textarea class="form-control" id="about" type="text" name="product[about]" placeholder="About the product" required></textarea>
+                    <div class="invalid-feedback">
+                        Say something about your product.
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="photo">Add a photo of your product</label>
+                <div class="input-group">
+                    <span class="input-group-text" id="photo"><i class="fas fa-image text-primary"></i></span>
+                    <input class="form-control" id="photo" type="file" name="photo" multiple required>
+                    <div class="invalid-feedback">
+                        At least one photo is required.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-3">
+                <button class="form-control btn-primary my-4"><small><i class="fas fa-plus"></i></small> Add Product</button>
+                <hr>
+            </div>
+        </form>
+        <a class="btn btn-primary btn-sm mt-2" href="/farms/<%=farm._id%>/products"><i class="fas fa-arrow-circle-left"></i> Back To All Products</a>
+    </div>
+</div>
+

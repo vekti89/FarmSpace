@@ -1,0 +1,96 @@
+<% layout('/layouts/boilerplate') -%>
+
+<div class="row">
+    <div class="offset-1 col-10 offset-md-2 col-md-8 offset-lg-3 col-lg-6 mt-3 mt-md-4">
+        
+        <div class="intro text-center">
+            <h2 class="shady">Edit <%=product.name%></h2>
+            <i class="fas fa-ellipsis-h"></i>
+        </div>
+
+        <form method="POST" action="/farms/<%=farm._id%>/products/<%=product._id%>?_method=PUT" novalidate class="validated-form row" enctype="multipart/form-data">
+            
+            <div class="mb-3 col-lg-9">
+                <label class="form-label" for="name">Product name</label>
+                <div class="input-group">
+                    <span class="input-group-text" id="name"><small><i class="fas fa-carrot text-primary"></i></small></span>
+                    <input class="form-control" id="name" type="text" name="product[name]" value="<%=product.name%>" required>
+                    <div class="invalid-feedback">
+                        Please provide a name for the product.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-3 col-lg-3 col-sm-6">
+                <label class="form-label"for="price">Price ($)</label>
+                <div class="input-group">
+                    <span class="input-group-text" id="price"><small><i class="fas fa-dollar-sign text-primary"></i></small></span>
+                    <input class="form-control" id="price" type="number" name="product[price]" value="<%=product.price%>" required>
+                    <div class="invalid-feedback">
+                        Please provide a price for the product.
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3 col-lg-6 col-sm-6">
+                <label for="unit">Unit</label>
+                <select class="form-select mt-2" aria-label="product unit select" id="unit" name="product[unit]" value=<%=product.unit%>>
+                    <option value="kg" <%=product.unit==="kg" ? "selected": ""%> >kg</option>
+                    <option value="l" <%=product.unit==="l" ? "selected": ""%> >l</option>
+                    <option value="pc" <%=product.unit==="pc" ? "selected": ""%> >pc</option>
+                </select>
+            </div>
+
+            <div class="mb-3 col-lg-6">
+                <label for="category">Product category</label>
+                <select class="form-select mt-2" aria-label="product category select" id="category" name="product[category]" value=<%=product.category%>>
+                    <option value="Fruit & Nuts" <%=product.category==="Fruit & Nuts" ? "selected": ""%> >Fruit & Nuts</option>
+                    <option value="Vegetables" <%=product.category==="Vegetables" ? "selected": ""%> >Vegetables</option>
+                    <option value="Eggs & Dairy" <%=product.category==="Eggs & Dairy" ? "selected": ""%> >Eggs & Dairy</option>
+                    <option value="Salads, Herbs, Oil" <%=product.category==="Salads, Herbs, Oil" ? "selected": ""%> >Salads, Herbs, Oil</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label"for="about">About the product</label>
+                <div class="input-group">
+                    <span class="input-group-text" id="about"><small><i class="fas fa-file text-primary"></i></small></span>
+                    <textarea class="form-control" id="about" type="text" name="product[about]" required><%=product.about%></textarea>
+                    <div class="invalid-feedback">
+                        Say something about your product.
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="photo">Add more product's photos</label>
+                <div class="input-group">
+                    <span class="input-group-text" id="photo"><i class="fas fa-image text-primary"></i></span>
+                    <input class="form-control" id="photo" type="file" name="photo" placeholder="Product photo"
+                    value="<%=product.photo%>" multiple>
+                </div>
+            </div> 
+
+            <div class="mb-3 row ">
+                <p class="text-muted">Check photo to remove it.</p>
+                <% product.photos.forEach(function(photo, i){ %>
+                    <div class=" col-6 col-md-4 text-center">
+                        <img src="<%= photo.thumbnail %>" alt="">
+                        <div class="form-check">
+                            <input class="form-check-input mx-auto" type="checkbox" id="photo-<%=i%>" name="deletePhotos[]" value="<%=photo.filename%>">
+                            <label class="form-check-label mx-auto" for="photo-<%=i%>">
+                            
+                            </label>
+                        </div>
+                    </div>
+                <% }) %> 
+            </div>
+        
+            <div class="mb-3">
+                <button class="form-control btn-primary my-4"><i class="fas fa-check"></i> Save Updates</button>
+                <hr>
+            </div>
+        </form>
+        <a class="btn btn-primary btn-sm mt-2" href="/farms/<%=farm._id%>/products/<%=product._id%>"><i class="fas fa-arrow-circle-left"></i> Back</a>
+    </div>
+</div>
