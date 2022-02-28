@@ -13,7 +13,7 @@ module.exports = function Basket(oldBasket){
         this.totalQty++; 
         this.totalPrice += storedItem.item.price; 
     }; 
-    // to output the list of items in basket (each item is an obj.)
+    // to output the list of items in basket
     this.generateArray = function(){
         var arr=[];
         for(let id in this.items){

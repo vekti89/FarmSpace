@@ -7,10 +7,6 @@ const cloudinary = require('cloudinary').v2;
 module.exports.index = async(req, res)=>{
     const {id}= req.params; 
     const farm = await Farm.findById(id).populate("products"); 
-    /*const products = await Product.find({farm:ObjectId(id)}).populate({
-        path:"farm",
-            select: "name"
-    });*/
     res.render("products/index", {id, farm})
 }
 
